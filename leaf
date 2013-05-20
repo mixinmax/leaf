@@ -59,13 +59,14 @@ else:
     print 'You supplied a framework that is not yet implemented.'
     sys.exit(0)
 
-project_assets = dict()
-for i in args['assets']:
-    if i in assets:
-        project_assets[i] = assets[i]
-    else:
-        print 'You supplied an asset that is not yet implemented.'
-        sys.exit(0)
+if args['assets']:
+    project_assets = dict()
+    for i in args['assets']:
+        if i in assets:
+            project_assets[i] = assets[i]
+        else:
+            print 'You supplied an asset that is not yet implemented.'
+            sys.exit(0)
 
 # create directory
 project_dir = os.getcwd() + '/' + project_name + '/'
@@ -87,15 +88,16 @@ else:
     os.system('mkdir ' + project_dir + 'img')
 
 # grab assets
-for i in project_assets:
-    for j in project_assets[i]:
-        filename = project_assets[i][j].split('/')[-1]
-        if j == 'css':
-            print 'Adding ' + filename + ' stylesheet ...'
-            os.system('curl --silent ' + project_assets[i][j] + ' > ' + project_dir + project_framework['css'] + filename)
-        elif j == 'js':
-            print 'Adding ' + filename + ' script ...'
-            os.system('curl --silent ' + project_assets[i][j] + ' > ' + project_dir + project_framework['js'] + filename)
-        elif j == 'img':
-            print 'Adding ' + filename + ' images ...'
-            os.system('curl --silent ' + project_assets[i][j] + ' > ' + project_dir + project_framework['img'] + filename)
+if args['assets']:
+    for i in project_assets:
+        for j in project_assets[i]:
+            filename = project_assets[i][j].split('/')[-1]
+            if j == 'css':
+                print 'Adding ' + filename + ' stylesheet ...'
+                os.system('curl --silent ' + project_assets[i][j] + ' > ' + project_dir + project_framework['css'] + filename)
+            elif j == 'js':
+                print 'Adding ' + filename + ' script ...'
+                os.system('curl --silent ' + project_assets[i][j] + ' > ' + project_dir + project_framework['js'] + filename)
+            elif j == 'img':
+                print 'Adding ' + filename + ' images ...'
+                os.system('curl --silent ' + project_assets[i][j] + ' > ' + project_dir + project_framework['img'] + filename)
