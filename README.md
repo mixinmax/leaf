@@ -15,8 +15,7 @@ You can use `curl` to fetch the install script and pipe it to `sh`:
     # don't just run remote scripts without looking at what they do first!
     curl https://raw.github.com/maxmackie/leaf/master/install.sh | sh
 
-Or, you can clone this repository locally move the `leaf` file to anywhere in your path (the script puts
-it in `/usr/local/bin`) and make it executable (`chmod +x /usr/local/bin/leaf`).
+Or, you can clone this repository and run `install.sh` locally. Whatever floats your boat. 
 
 ## Usage
 Once installed, you can use leaf through the command line:

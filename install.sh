@@ -3,7 +3,7 @@
 if [ ! -f ./leaf ];
 then
     echo "Downloading leaf..."
-    curl https://raw.github.com/maxmackie/leaf/master/leaf > leaf
+    curl -s https://raw.github.com/maxmackie/leaf/master/leaf > leaf
     echo "Installing..."
     chmod +x ./leaf
     mv ./leaf /usr/local/bin/
