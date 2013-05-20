@@ -1,8 +1,6 @@
 # leaf <img src="http://oi41.tinypic.com/1epe02.jpg"/>
 Leaf is a simple project bootstrapper that will set you up with a framework and assets for your next project.
 
-LEAF IS STILL IN ALPHA
-
 ## Installation
 Leaf depends on a couple basic utilities:
 
