@@ -34,7 +34,7 @@ def create_config():
     codeigniter['css'] = 'css/'
     codeigniter['js']  = 'js/'
     codeigniter['img'] = 'img/'
-    codeigniter['codeigniter'] = codeigniter
+    frameworks['codeigniter'] = codeigniter
 
     # cakephp
     cakephp = dict()
@@ -43,7 +43,7 @@ def create_config():
     cakephp['css'] = 'app/webroot/css/ '
     cakephp['js']  = 'app/webroot/js/'
     cakephp['img'] = 'app/webroot/img/'
-    cakephp['cakephp'] = cakephp
+    frameworks['cakephp'] = cakephp
 
     global assets
     assets = dict()
