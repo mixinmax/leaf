@@ -7,6 +7,7 @@ Leaf depends on a couple basic utilities:
 - python (version 2.7 or later)
 - git
 - curl
+- bash
 
 You can use `curl` to fetch the install script and pipe it to `sh`:
 
@@ -18,23 +19,23 @@ Or, you can clone this repository and run `install.sh` locally. Whatever floats 
 ## Usage
 Once installed, you can use leaf through the command line:
 
-    leaf <project_name> -f <framework> -a <list> <of> <assets>
+    leaf new [project_name] -f [framework] -a [list] [of] [assets]
 
 Frameworks and assets are all contained within the `leaf` executable (smaller footprint). To see which ones
 are available in your current version, type:
 
     leaf list
 
+You can also update leaf at any time by running `leaf update`.
+
 ## Examples
 Let's say you want to create a new project using FuelPHP with the latest version of Twitter Bootstrap:
 
     cd ~/projects
-    leaf my_project -f fuelphp -a bootstrap
+    leaf new foo -f fuelphp -a bootstrap
 
-After that you'll have FuelPHP checked out to the root of the newly created `~/projects/my_project` and the
+After that you'll have FuelPHP checked out to the root of the newly created `~/projects/foo` and the
 Bootstrap assets added to the correct directories (in this case, `public/assets/[css|js|img]`).
-
-## Contributing
 
 ## Icon
 Thanks to <a href="http://glyphicons.com/">Glyphicons</a> for the awesome leaf icon.

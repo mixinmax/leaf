@@ -27,6 +27,24 @@ def create_config():
     fuelphp['img'] = 'public/assets/img/'
     frameworks['fuelphp'] = fuelphp
 
+    # codeigniter
+    codeigniter = dict()
+    codeigniter['name'] = 'codeigniter'
+    codeigniter['url'] = 'https://github.com/EllisLab/CodeIgniter.git'
+    codeigniter['css'] = 'css/'
+    codeigniter['js']  = 'js/'
+    codeigniter['img'] = 'img/'
+    codeigniter['codeigniter'] = codeigniter
+
+    # cakephp
+    cakephp = dict()
+    cakephp['name'] = 'cakephp'
+    cakephp['url'] = 'https://github.com/cakephp/cakephp.git'
+    cakephp['css'] = 'app/webroot/css/ '
+    cakephp['js']  = 'app/webroot/js/'
+    cakephp['img'] = 'app/webroot/img/'
+    cakephp['cakephp'] = cakephp
+
     global assets
     assets = dict()
 
