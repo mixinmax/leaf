@@ -136,7 +136,7 @@ def list_options():
 # ===========================================
 def update_leaf():
     print 'Updating...'
-    os.system('curl -s https://raw.github.com/maxmackie/leaf/master/leaf > leaf')
+    os.system('curl -s https://raw.github.com/maxmackie/leaf/master/leaf > /usr/local/bin/leaf')
     print 'Done.'
 
 # ===========================================
