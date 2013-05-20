@@ -1,0 +1,101 @@
+#! /usr/bin/env python
+
+# ===========================================
+#  ROUTING
+# ===========================================
+import argparse
+import sys
+import os
+
+parser = argparse.ArgumentParser(prog='leaf')
+parser.add_argument('name', help='Name of the new project, used to create the directory')
+parser.add_argument('-f', '--framework', help='The framework to use for the project', required=True)
+parser.add_argument('-a', '--assets', help='A list of assets to download for the framework', nargs='+', required=False)
+args = vars(parser.parse_args())
+
+# ===========================================
+#  CONFIGURATION
+# ===========================================
+
+# FRAMEWORKS
+frameworks = dict()
+
+# no framework selected
+none = dict()
+none['name'] = 'none'
+none['css'] = 'css/'
+none['js']  = 'js/'
+none['img'] = 'img/'
+frameworks['none'] = none
+
+# fuelphp
+fuelphp = dict()
+fuelphp['name'] = 'fuelphp'
+fuelphp['url'] = 'https://github.com/fuel/fuel.git'
+fuelphp['css'] = 'public/assets/css/'
+fuelphp['js']  = 'public/assets/js/'
+fuelphp['img'] = 'public/assets/img/'
+frameworks['fuelphp'] = fuelphp
+
+# ASSETS
+assets = dict()
+
+# bootstrap (css and js, minified)
+bootstrap = dict()
+bootstrap['name'] = 'bootstrap'
+bootstrap['css'] = 'http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/css/bootstrap.min.css'
+bootstrap['js'] = 'http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js'
+bootstrap['img'] = 'http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/img/glyphicons-halflings.png'
+assets['bootstrap'] = bootstrap
+
+# ===========================================
+#  NEW PROJECT
+# ===========================================
+project_name = args['name']
+
+if args['framework'] in frameworks:
+    project_framework = frameworks.get(args['framework'])
+else:
+    print 'You supplied a framework that is not yet implemented.'
+    sys.exit(0)
+
+project_assets = dict()
+for i in args['assets']:
+    if i in assets:
+        project_assets[i] = assets[i]
+    else:
+        print 'You supplied an asset that is not yet implemented.'
+        sys.exit(0)
+
+# create directory
+project_dir = os.getcwd() + '/' + project_name + '/'
+if not os.path.exists(project_dir):
+    print 'Creating \'' + project_name + '\' directory...'
+    os.makedirs(project_dir)
+else:
+    print 'Can\'t create \'' + project_name + '\' directory. It already exists.'
+    sys.exit(0)
+
+# checkout framework
+if project_framework['name'] != "none":
+    os.system('git clone ' + project_framework['url'] + ' ' + project_dir)
+    os.system('rm -rf ' + project_dir + '.git*')
+    os.system('git init ' + project_dir)
+else:
+    os.system('mkdir ' + project_dir + 'css')
+    os.system('mkdir ' + project_dir + 'js')
+    os.system('mkdir ' + project_dir + 'img')
+
+# grab assets
+for i in project_assets:
+    for j in project_assets[i]:
+        filename = project_assets[i][j].split('/')[-1]
+        if j == 'css':
+            print 'Adding ' + filename + ' stylesheet ...'
+            os.system('curl --silent ' + project_assets[i][j] + ' > ' + project_dir + project_framework['css'] + filename)
+        elif j == 'js':
+            print 'Adding ' + filename + ' script ...'
+            os.system('curl --silent ' + project_assets[i][j] + ' > ' + project_dir + project_framework['js'] + filename)
+        elif j == 'img':
+            print 'Adding ' + filename + ' images ...'
+            os.system('curl --silent ' + project_assets[i][j] + ' > ' + project_dir + project_framework['img'] + filename)
